@@ -474,3 +474,199 @@ kubectl apply -f vpa.yml
 ```bash
 kubectl delete -f vpa.yml
 ```
+
+---
+
+# RBAC (Important Commands)
+
+### To apply cluster level role and cluster role bindings, file to be downloaded
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+```
+
+### Get all Roles
+```bash
+kubectl get roles
+```
+
+### Get all RoleBindings
+```bash
+kubectl get rolebindings
+```
+
+### Get all ClusterRoles
+```bash
+kubectl get clusterroles
+```
+
+### Get all ClusterRoleBindings
+```bash
+kubectl get clusterrolebindings
+```
+
+---
+
+### Create RBAC resources
+```bash
+kubectl apply -f role.yml
+```
+
+### Delete RBAC resources
+```bash
+kubectl delete -f role.yml
+```
+
+---
+
+### Check if you have permission
+```bash
+kubectl auth can-i <verb> <resource>
+```
+
+Example:
+```bash
+kubectl auth can-i delete pods
+```
+
+---
+
+### Check another user's permission
+```bash
+kubectl auth can-i <verb> <resource> --as=<username>
+```
+
+Example:
+```bash
+kubectl auth can-i get pods --as=john
+```
+
+---
+
+# ServiceAccount
+
+### Get all ServiceAccounts
+```bash
+kubectl get serviceaccounts
+```
+
+### Describe a ServiceAccount
+```bash
+kubectl describe serviceaccount <serviceaccount-name>
+```
+
+### Create a ServiceAccount
+```bash
+kubectl apply -f service-account.yml
+```
+
+### Delete a ServiceAccount
+```bash
+kubectl delete -f service-account.yml
+```
+
+---
+
+# RoleBinding
+
+### Get all RoleBindings
+```bash
+kubectl get rolebindings
+```
+
+### Describe a RoleBinding
+```bash
+kubectl describe rolebinding <rolebinding-name> -n <namespace>
+```
+
+### Create a RoleBinding
+```bash
+kubectl apply -f rolebinding.yml
+```
+
+### Delete a RoleBinding
+```bash
+kubectl delete -f rolebinding.yml
+```
+
+
+---
+
+# Kubernetes Dashboard
+
+### Deploy the Dashboard Admin User (ServiceAccount + RoleBinding)
+```bash
+kubectl apply -f dashboard-admin-user.yml
+```
+
+### Generate Login Token
+```bash
+kubectl -n kubernetes-dashboard create token admin-user
+```
+
+### Start Kubernetes Proxy
+```bash
+kubectl proxy --address=0.0.0.0 --accept-hosts='.*'
+```
+
+### Open Kubernetes Dashboard
+```
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
+
+---
+
+# Custom Resource Definition (CRD)
+
+### Get all CRDs
+```bash
+kubectl get crd
+```
+
+### Describe a CRD
+```bash
+kubectl describe crd <crd-name>
+```
+
+### Create a CRD
+```bash
+kubectl apply -f crd.yml
+```
+
+### Delete a CRD
+```bash
+kubectl delete -f crd.yml
+```
+
+---
+
+# Custom Resources
+
+### Get all Custom Resources
+```bash
+kubectl get <resource-name>
+```
+
+Example:
+```bash
+kubectl get databases
+```
+
+### Describe a Custom Resource
+```bash
+kubectl describe <resource-name> <resource-instance>
+```
+
+Example:
+```bash
+kubectl describe database mysql-prod
+```
+
+### Create a Custom Resource
+```bash
+kubectl apply -f custom-resource.yml
+```
+
+### Delete a Custom Resource
+```bash
+kubectl delete -f custom-resource.yml
+```
