@@ -670,3 +670,88 @@ kubectl apply -f custom-resource.yml
 ```bash
 kubectl delete -f custom-resource.yml
 ```
+
+---
+
+# Helm
+
+### Create a new Helm Chart
+```bash
+helm create apache-helm
+```
+
+### Package a Helm Chart
+```bash
+helm package ./apache-helm/
+```
+
+### Install a Chart
+```bash
+helm install dev-apache apache-helm
+```
+
+### Install a Chart in a Namespace (Create Namespace if it doesn't exist)
+```bash
+helm install dev-apache apache-helm -n dev-apache --create-namespace
+```
+
+### Upgrade an Existing Release
+```bash
+helm upgrade dev-apache ./apache-helm/ -n dev-apache
+```
+
+### Rollback to a Previous Revision
+```bash
+helm rollback dev-apache 1 -n dev-apache
+```
+
+---
+
+### List Installed Releases
+```bash
+helm list
+```
+
+### List Releases in All Namespaces
+```bash
+helm list -A
+```
+
+### View Release History
+```bash
+helm history dev-apache
+```
+
+### Get Release Status
+```bash
+helm status dev-apache
+```
+
+### Uninstall a Release
+```bash
+helm uninstall dev-apache -n dev-apache
+```
+
+---
+
+# Helm Repositories
+
+### List Configured Repositories
+```bash
+helm repo list
+```
+
+### Add a Repository
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
+### Update Repository Information
+```bash
+helm repo update
+```
+
+### Search Available Charts
+```bash
+helm search repo nginx
+```
